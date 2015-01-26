@@ -1,0 +1,25 @@
+{
+  "name": "gulp-haml-sass",
+  "version": "0.0.0",
+  "homepage": "https://github.com/edravis/gulp-haml-sass",
+  "authors": [
+    "edravis <hello@sospedra.me>"
+  ],
+  "description": "Fast bootstraping for the web stack: sass, haml and -of course- js.",
+  "main": "gulpfile.js",
+  "keywords": [
+    "haml",
+    "sass"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "react": "~0.12.2"
+  }
+}

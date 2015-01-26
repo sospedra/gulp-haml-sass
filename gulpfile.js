@@ -11,7 +11,8 @@ var autoprefixer 	= require('gulp-autoprefixer'),
 		notify        = require('gulp-notify'),
 		rename 				= require('gulp-rename'),
 		sass 					= require('gulp-ruby-sass'),
-		uglify        = require('gulp-uglify');
+		uglify        = require('gulp-uglify'),
+		vendor 				= require('gulp-concat-vendor');
 
 
 gulp.task('pages', function () {
@@ -29,6 +30,14 @@ gulp.task('styles', function() {
 		.pipe(minifycss())
 		.pipe(gulp.dest('dist/assets/css'))
 		.pipe(notify({ message: 'Styles task complete' }));
+});
+
+gulp.task('vendor', function(){
+	return gulp.src('bower_components/*')
+		.pipe(cache(vendor('vendor.js')))
+		.pipe(rename({ suffix: '.min' }))
+		.pipe(uglify())
+		.pipe(gulp.dest('dist/assets/js/vendor/'));
 });
 
 gulp.task('scripts', function() {
@@ -49,7 +58,7 @@ gulp.task('images', function() {
 });
 
 gulp.task('clean', function(cb) {
-	del(['dist', 'dist/assets/css', 'dist/assets/js', 'dist/assets/img'], cb)
+	del(['dist', 'dist/assets/css', 'dist/assets/js', 'dist/assets/img'], cb);
 });
 
 gulp.task('connect', function() {
@@ -72,5 +81,5 @@ gulp.task('watch', function() {
 
 // Kick off
 gulp.task('default', ['clean', 'watch', 'connect'], function() {
-	gulp.start('pages', 'styles', 'scripts', 'images');
+	gulp.start('vendor', 'pages', 'styles', 'scripts', 'images');
 });
